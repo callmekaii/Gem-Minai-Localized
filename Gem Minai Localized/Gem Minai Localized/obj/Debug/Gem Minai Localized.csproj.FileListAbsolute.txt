@@ -1,0 +1,2 @@
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\obj\Debug\Gem Minai Localized.csproj.AssemblyReference.cache
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\obj\Debug\Gem Minai Localized.csproj.CoreCompileInputs.cache

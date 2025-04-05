@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Gem_Minai_Localized</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>Gem Minai Localized</AssemblyTitle>
+    <Product>Gem Minai Localized</Product>
+    <Copyright>Copyright ©  2025</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="espeak\espeak-ng-linux-amd64.dll" />
+    <Content Include="espeak\espeak-ng-macos-amd64.dll" />
+    <Content Include="espeak\espeak-ng-macos-arm64.dll" />
+    <Content Include="espeak\espeak-ng-win-amd64.dll" />
+    <Content Include="espeak\espeak-ng-win-arm64.dll" />
+    <Content Include="espeak\HOW_TO_USE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google_GenerativeAI" Version="2.5.5" />
+    <PackageReference Include="GroqApiLibrary" Version="1.0.9" />
+    <PackageReference Include="KokoroSharp" Version="0.5.6" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Whisper.net" Version="1.8.1" />
+  </ItemGroup>
+</Project>
