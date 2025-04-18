@@ -1,4 +1,4 @@
-[![SVG Banners](https://svg-banners.vercel.app/api?type=luminance&text1=Gem-Minai-Localized%20🌻&width=800&height=400)](https://github.com/Akshay090/svg-banners)
+[![SVG Banners](https://svg-banners.vercel.app/api?type=luminance&text1=Gem-Minai-Localized&width=800&height=400)](https://github.com/Akshay090/svg-banners)
 
 Gem Minai Localized is a .NET console application that provides a live voice interface to a custom Gemini AI persona using voice input and text-to-speech output. Interact with your personal AI assistant, "Gem Minai," by speaking commands after using a trigger word.
 
