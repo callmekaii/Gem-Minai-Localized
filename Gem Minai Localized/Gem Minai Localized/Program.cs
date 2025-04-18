@@ -1,4 +1,4 @@
-﻿using GenerativeAI;
+using GenerativeAI;
 using GenerativeAI.Types;
 using KokoroSharp;
 using KokoroSharp.Core;
@@ -22,7 +22,7 @@ namespace Gem_Minai_Localized
         private static void Main(string[] args)
         {
             //Gemini
-            GoogleAi googleAI = new GoogleAi("AIzaSyAyaaljvmRJDBqmrpoOQGtbCP0by_vxDF8");
+            GoogleAi googleAI = new GoogleAi("GoogleAPI");
             var model = googleAI.CreateGenerativeModel("models/gemini-1.5-flash");
             var history = new List<Content>
             {
@@ -50,7 +50,8 @@ namespace Gem_Minai_Localized
             public void Core(VoskRecognizer VoskRecognizer, ChatSession chatSession)
             {
                 //Record Audio to be processed
-                var waveFormat = new WaveFormat(19000, 1);
+
+                var waveFormat = new WaveFormat(16000, 1);
                 using (var waveIn = new WaveInEvent())
                 {
                     waveIn.WaveFormat = waveFormat;
