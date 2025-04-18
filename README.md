@@ -25,7 +25,7 @@ Before you can run this application, you will need:
 
 1.  **Clone the repository:**
     ```bash
-    [git clone <repository_url>](https://github.com/callmekaii/Gem-Minai-Localized.git)
+    gh repo clone callmekaii/Gem-Minai-Localized
     cd Gem-Minai-Localized
     ```
 2.  **Restore dependencies:**
