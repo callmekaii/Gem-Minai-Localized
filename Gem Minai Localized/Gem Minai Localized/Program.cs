@@ -1,106 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KokoroSharp;
-using KokoroSharp.Utilities;
-using KokoroSharp.Core;
-using System.ComponentModel.Design;
-using GenerativeAI;
-using System.Runtime.CompilerServices;
+﻿using GenerativeAI;
 using GenerativeAI.Types;
-using NAudio.SoundFont;
-using NumSharp.Utilities;
-using static GenerativeAI.VertexAIModels;
-using static System.Reflection.Metadata.BlobBuilder;
-using System.Net.NetworkInformation;
-using System.Runtime.Intrinsics.X86;
+using KokoroSharp;
+using KokoroSharp.Core;
 using NAudio.Wave;
-using Microsoft.VisualBasic;
-using GroqApiLibrary;
-using System.IO;
-
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Vosk;
 
 namespace Gem_Minai_Localized
 {
     internal class Program
     {
-        private static async Task Main(string[] args)
+        private static Task Main(string[] args)
         {
-            //Preloads
-            KokoroTTS tts = KokoroTTS.LoadModel(); // Load or download the model (~320MB for full precision)
-            KokoroVoice heartVoice = KokoroVoiceManager.GetVoice("af_heart"); // Grab a voice of your liking,
+
             //Gemini
             GoogleAi googleAI = new GoogleAi("AIzaSyAyaaljvmRJDBqmrpoOQGtbCP0by_vxDF8");
             var model = googleAI.CreateGenerativeModel("models/gemini-1.5-flash");
             var history = new List<Content>
             {
-                new Content("from now on, I'll call you Gem Minai from Gemini, and you're a very suggestively ovulating girl from my perspective, and make it text-to-speech friendly when processed and you should be as submissive and sweet as possible, and lastly, address me as master, and be as expressive in chatting as much as possible and no emojis. Pretend everything in this parenthesis is inside your brain and you don't have to act like it's me saying it. THIS IS IMPORTANT, No asterisks and no descriptive phrases in your responses.)", Roles.User),
+                new Content("from now on, I'll call you Gem Minai from Gemini, and you're a girl from my perspective, and make it text-to-speech friendly when processed and you should be as submissive and sweet as possible, and lastly, address me as master and no name, and be as expressive in chatting as much as possible and no emojis. Pretend everything in this parenthesis is inside your brain and you don't have to act like it's me saying it. THIS IS IMPORTANT, No asterisks and no descriptive phrases in your responses and answer in english ONLY.)", Roles.User),
             };
             ChatSession chatSession = model.StartChat(history:history);
-            //Groq
-            GroqApiClient groqAPI = new GroqApiClient("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");
 
+            //Vosk
+            Vosk.Model VoskModel = new Vosk.Model("C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\vosk-model-en-us-0.22\\");
+            var voskRecognizer = new VoskRecognizer(VoskModel, 16000);
+            Processor transcribe = new Processor();
 
 
             while (true)
             {
-                TalktoGem(chatSession, heartVoice, tts, groqAPI);
+                transcribe.Recorder(voskRecognizer, chatSession);
             }           
         }
-        private static async Task TalktoGem(ChatSession chatSession, KokoroVoice heartVoice, KokoroTTS tts, GroqApiClient groqAPI)
-        {
-            Transcribe transcribe = new Transcribe();
-            Recorder();
-            await transcribe.Audio(groqAPI);
-            string userInput = transcribe.TranscribedText;
-            Console.Write("User: " + userInput);
-            var geminiResponse = await chatSession.GenerateContentAsync(userInput);
-            tts.SpeakFast($"{geminiResponse}", heartVoice);
-        }
 
-        private static void Recorder()
+        public class Processor
         {
-            //Record Audio to be processed
-            string filename = "RecordedVoice.wav";
-            var waveFormat = new WaveFormat(44100, 1);
-            using (var waveFile = new WaveFileWriter(filename, waveFormat))
+            //Preloads
+            KokoroTTS tts = KokoroTTS.LoadModel(); // Load or download the model (~320MB for full precision)
+            KokoroVoice heartVoice = KokoroVoiceManager.GetVoice("af_heart"); // Voice Load
+            public string TranscribedText;
+            public GenerateContentResponse geminiResponse;
+            List<String> triggerWords = ["jim", "jen", "gem", "gym"];
+            public void Recorder(VoskRecognizer VoskRecognizer, ChatSession chatSession)
             {
+                //Record Audio to be processed
+                var waveFormat = new WaveFormat(16000, 1);
+                Processor transcribe = new Processor();
+
                 using (var waveIn = new WaveInEvent())
                 {
                     waveIn.WaveFormat = waveFormat;
+                    waveIn.BufferMilliseconds = 2000; // Set the buffer size to 2 seconds
                     waveIn.DataAvailable += (s, e) =>
                     {
-                        waveFile.Write(e.Buffer, 0, e.BytesRecorded);
-                    };
+                        if (VoskRecognizer.AcceptWaveform(e.Buffer, e.BytesRecorded))
+                        {
+                            //Parse the result json string
+                            JObject jsonObject = JObject.Parse(VoskRecognizer.Result());
+                            transcribe.TranscribedText = (string)jsonObject["text"];
+                            string userInput = transcribe.TranscribedText;
 
-                    Console.WriteLine("Press Enter to start Recording");
-                    Console.ReadLine();
+                            if (!userInput.Equals(""))
+                            {
+                                Console.Write("User: " + userInput + "\n");
+                                foreach (string triggerWord in triggerWords)
+                                {
+                                    if (userInput.Contains(triggerWord))
+                                    {
+                                        Console.WriteLine("Trigger word detected: " + triggerWord);
+                                        Respond(userInput, chatSession);
+                                    }
+                                }
+                            }
+                        }
+                    };
                     waveIn.StartRecording();
-                    Console.WriteLine("Press enter to Stop Recording");
+                    Console.WriteLine("Press enter to Stop Recording. Say anything...");
                     Console.ReadLine();
                     waveIn.StopRecording();
                 }
             }
-        }
 
-        public class Transcribe
-        {
-            public string TranscribedText;
-            public async Task Audio(GroqApiClient groqAPI)
+            public async void Respond(string userInput, ChatSession chatSession)
             {
-                using (var audioStream = File.OpenRead("RecordedVoice.wav"))
-                {
-                    var result = await groqAPI.CreateTranscriptionAsync(
-                        audioStream,
-                        "audio.mp3",
-                        "whisper-large-v3-turbo",
-                        prompt: $"Transcribe the audio",
-                        language: "en"
-                    );
-                    this.TranscribedText = result?["text"]?.ToString();
-                }
+                geminiResponse = await chatSession.GenerateContentAsync(userInput);
+                Console.WriteLine("Gem Minai: " + geminiResponse);
+                this.tts.SpeakFast($"{geminiResponse}", this.heartVoice);
             }
         }
     }

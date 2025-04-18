@@ -63,3 +63,9 @@ C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\ne
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Whisper.net.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\libgcc_s_seh-1.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\libstdc++-6.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\libvosk.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\libwinpthread-1.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Vosk.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Newtonsoft.Json.dll
