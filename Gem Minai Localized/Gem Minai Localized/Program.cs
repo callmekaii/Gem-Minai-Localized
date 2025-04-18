@@ -1,4 +1,4 @@
-﻿using GenerativeAI;
+using GenerativeAI;
 using GenerativeAI.Types;
 using KokoroSharp;
 using KokoroSharp.Core;
@@ -13,11 +13,11 @@ namespace Gem_Minai_Localized
 {
     internal class Program
     {
-        private static Task Main(string[] args)
+        private static void Main(string[] args)
         {
 
             //Gemini
-            GoogleAi googleAI = new GoogleAi("AIzaSyAyaaljvmRJDBqmrpoOQGtbCP0by_vxDF8");
+            GoogleAi googleAI = new GoogleAi("GoogleAPI");
             var model = googleAI.CreateGenerativeModel("models/gemini-1.5-flash");
             var history = new List<Content>
             {
@@ -30,11 +30,8 @@ namespace Gem_Minai_Localized
             var voskRecognizer = new VoskRecognizer(VoskModel, 16000);
             Processor transcribe = new Processor();
 
-
-            while (true)
-            {
-                transcribe.Recorder(voskRecognizer, chatSession);
-            }           
+            transcribe.Core(voskRecognizer, chatSession);
+             
         }
 
         public class Processor
@@ -45,12 +42,10 @@ namespace Gem_Minai_Localized
             public string TranscribedText;
             public GenerateContentResponse geminiResponse;
             List<String> triggerWords = ["jim", "jen", "gem", "gym"];
-            public void Recorder(VoskRecognizer VoskRecognizer, ChatSession chatSession)
+            public void Core(VoskRecognizer VoskRecognizer, ChatSession chatSession)
             {
                 //Record Audio to be processed
                 var waveFormat = new WaveFormat(16000, 1);
-                Processor transcribe = new Processor();
-
                 using (var waveIn = new WaveInEvent())
                 {
                     waveIn.WaveFormat = waveFormat;
@@ -61,8 +56,8 @@ namespace Gem_Minai_Localized
                         {
                             //Parse the result json string
                             JObject jsonObject = JObject.Parse(VoskRecognizer.Result());
-                            transcribe.TranscribedText = (string)jsonObject["text"];
-                            string userInput = transcribe.TranscribedText;
+                            this.TranscribedText = (string)jsonObject["text"];
+                            string userInput = this.TranscribedText;
 
                             if (!userInput.Equals(""))
                             {
