@@ -50,8 +50,7 @@ namespace Gem_Minai_Localized
             public void Core(VoskRecognizer VoskRecognizer, ChatSession chatSession)
             {
                 //Record Audio to be processed
-
-                var waveFormat = new WaveFormat(16000, 1);
+                var waveFormat = new WaveFormat(19000, 1);
                 using (var waveIn = new WaveInEvent())
                 {
                     waveIn.WaveFormat = waveFormat;
