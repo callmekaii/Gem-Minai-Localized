@@ -69,3 +69,7 @@ C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\ne
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\libwinpthread-1.dll
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Vosk.dll
 C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\System.Private.Windows.Core.dll
+C:\Users\kaise\source\repos\Gem Minai Localized\Gem Minai Localized\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll

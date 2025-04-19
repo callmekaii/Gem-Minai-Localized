@@ -6,16 +6,21 @@ using NAudio.Wave;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Drawing;
 using Vosk;
+using static System.Net.Mime.MediaTypeNames;
+using System.Drawing.Imaging;
+
 
 namespace Gem_Minai_Localized
 {
     internal class Program
     {
-        private static Task Main(string[] args)
+        private static void Main(string[] args)
         {
-
             //Gemini
             GoogleAi googleAI = new GoogleAi("AIzaSyAyaaljvmRJDBqmrpoOQGtbCP0by_vxDF8");
             var model = googleAI.CreateGenerativeModel("models/gemini-1.5-flash");
@@ -26,15 +31,12 @@ namespace Gem_Minai_Localized
             ChatSession chatSession = model.StartChat(history:history);
 
             //Vosk
-            Vosk.Model VoskModel = new Vosk.Model("C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\vosk-model-en-us-0.22\\");
+            Vosk.Model VoskModel = new Vosk.Model("C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\vosk-model-small-en-us-0.15\\");
             var voskRecognizer = new VoskRecognizer(VoskModel, 16000);
             Processor transcribe = new Processor();
 
-
-            while (true)
-            {
-                transcribe.Recorder(voskRecognizer, chatSession);
-            }           
+            transcribe.Core(voskRecognizer, chatSession);
+             
         }
 
         public class Processor
@@ -45,12 +47,10 @@ namespace Gem_Minai_Localized
             public string TranscribedText;
             public GenerateContentResponse geminiResponse;
             List<String> triggerWords = ["jim", "jen", "gem", "gym"];
-            public void Recorder(VoskRecognizer VoskRecognizer, ChatSession chatSession)
+            public void Core(VoskRecognizer VoskRecognizer, ChatSession chatSession)
             {
                 //Record Audio to be processed
-                var waveFormat = new WaveFormat(16000, 1);
-                Processor transcribe = new Processor();
-
+                var waveFormat = new WaveFormat(19000, 1);
                 using (var waveIn = new WaveInEvent())
                 {
                     waveIn.WaveFormat = waveFormat;
@@ -61,20 +61,33 @@ namespace Gem_Minai_Localized
                         {
                             //Parse the result json string
                             JObject jsonObject = JObject.Parse(VoskRecognizer.Result());
-                            transcribe.TranscribedText = (string)jsonObject["text"];
-                            string userInput = transcribe.TranscribedText;
+                            this.TranscribedText = (string)jsonObject["text"];
+                            string userInput = this.TranscribedText;
 
                             if (!userInput.Equals(""))
                             {
                                 Console.Write("User: " + userInput + "\n");
-                                foreach (string triggerWord in triggerWords)
+
+                                //Differentiates screenshotting commands and trigger words
+                                if (userInput.Contains("screenshot"))
                                 {
-                                    if (userInput.Contains(triggerWord))
+                                    //Saves the screenshot and Gem processes the image
+                                    SaveScreenShot();
+                                    ProcessScreenshot(chatSession);
+                                }
+
+                                else
+                                {
+                                    foreach (string triggerWord in triggerWords)
                                     {
-                                        Console.WriteLine("Trigger word detected: " + triggerWord);
-                                        Respond(userInput, chatSession);
+                                        if (userInput.Contains(triggerWord))
+                                        {
+                                            Console.WriteLine("Trigger word detected: " + triggerWord);
+                                            Respond(userInput, chatSession);
+                                        }
                                     }
                                 }
+
                             }
                         }
                     };
@@ -91,6 +104,26 @@ namespace Gem_Minai_Localized
                 Console.WriteLine("Gem Minai: " + geminiResponse);
                 this.tts.SpeakFast($"{geminiResponse}", this.heartVoice);
             }
+
+            public static void SaveScreenShot()
+            {
+                Console.WriteLine("Screenshot detected");
+                Console.WriteLine("Capturing Image...");
+                var image = ScreenCapture.CaptureDesktop();
+                image.Save(@"snippetsource.jpg", ImageFormat.Jpeg);
+                Console.WriteLine("Image Saved!");
+            }
+
+            public async void ProcessScreenshot(ChatSession chatSession)
+            {
+                var request = new GenerateContentRequest();
+                request.AddText("Process the image and give me a 10-word-summary of it. Answer it for me too if it's a question");
+                request.AddInlineFile("snippetsource.jpg");
+                geminiResponse = await chatSession.GenerateContentAsync(request);
+                Console.WriteLine("Gem Minai: " + geminiResponse);
+                this.tts.SpeakFast($"{geminiResponse}", this.heartVoice);
+            }
         }
+
     }
 }

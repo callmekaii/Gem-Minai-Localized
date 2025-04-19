@@ -3,11 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|c:\\users\\kaise\\source\\repos\\gem minai localized\\gem minai localized\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|solutionrelative:gem minai localized\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|c:\\users\\kaise\\source\\repos\\gem minai localized\\gem minai localized\\screencapture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|solutionrelative:gem minai localized\\screencapture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kaise\\source\\repos\\DiscordBot\\DiscordBot\\bin\\Debug\\net8.0\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|c:\\users\\kaise\\source\\repos\\gem minai localized\\gem minai localized\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D051C0C-F421-4479-BF11-F822BD27FA7F}|Gem Minai Localized\\Gem Minai Localized.csproj|solutionrelative:gem minai localized\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,34 +21,34 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "config.json",
-              "DocumentMoniker": "C:\\Users\\kaise\\source\\repos\\DiscordBot\\DiscordBot\\bin\\Debug\\net8.0\\config.json",
-              "RelativeDocumentMoniker": "..\\DiscordBot\\DiscordBot\\bin\\Debug\\net8.0\\config.json",
-              "ToolTip": "C:\\Users\\kaise\\source\\repos\\DiscordBot\\DiscordBot\\bin\\Debug\\net8.0\\config.json",
-              "RelativeToolTip": "..\\DiscordBot\\DiscordBot\\bin\\Debug\\net8.0\\config.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-05T11:12:36.228Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ScreenCapture.cs",
+              "DocumentMoniker": "C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\ScreenCapture.cs",
+              "RelativeDocumentMoniker": "Gem Minai Localized\\ScreenCapture.cs",
+              "ToolTip": "C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\ScreenCapture.cs",
+              "RelativeToolTip": "Gem Minai Localized\\ScreenCapture.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T14:35:32.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\Program.cs",
               "RelativeDocumentMoniker": "Gem Minai Localized\\Program.cs",
               "ToolTip": "C:\\Users\\kaise\\source\\repos\\Gem Minai Localized\\Gem Minai Localized\\Program.cs",
               "RelativeToolTip": "Gem Minai Localized\\Program.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAYwD4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGYAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-05T10:17:25.883Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
             }
           ]
         }
