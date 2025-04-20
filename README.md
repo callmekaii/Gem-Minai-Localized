@@ -11,6 +11,7 @@ Gem Minai Localized is a .NET console application that provides a live voice int
 * **Custom Persona:** Configured with a specific persona ("Gem Minai") for a personalized interaction experience.
 * **Voice Output:** Utilizes KokoroTTS for generating natural-sounding voice responses.
 * **Trigger Word Activation:** Responses are processed only when a predefined trigger word is detected in your spoken input.
+Screenshot Auto Upload: If Gem Minai detects "screenshot" on your transcription, she will summarize what's on your current screen and answer if there are questions included in the screenshot.
 
 
 ## Prerequisites
