@@ -6,13 +6,8 @@ using NAudio.Wave;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Drawing;
-using Vosk;
-using static System.Net.Mime.MediaTypeNames;
 using System.Drawing.Imaging;
+using Vosk;
 
 
 namespace Gem_Minai_Localized
@@ -78,14 +73,7 @@ namespace Gem_Minai_Localized
 
                                 else
                                 {
-                                    foreach (string triggerWord in triggerWords)
-                                    {
-                                        if (userInput.Contains(triggerWord))
-                                        {
-                                            Console.WriteLine("Trigger word detected: " + triggerWord);
-                                            Respond(userInput, chatSession);
-                                        }
-                                    }
+                                    CheckTriggerWords(userInput, chatSession);
                                 }
 
                             }
@@ -102,7 +90,7 @@ namespace Gem_Minai_Localized
             {
                 geminiResponse = await chatSession.GenerateContentAsync(userInput);
                 Console.WriteLine("Gem Minai: " + geminiResponse);
-                this.tts.SpeakFast($"{geminiResponse}", this.heartVoice);
+                this.tts.SpeakFast($"{geminiResponse}", heartVoice);
             }
 
             public static void SaveScreenShot()
@@ -122,6 +110,18 @@ namespace Gem_Minai_Localized
                 geminiResponse = await chatSession.GenerateContentAsync(request);
                 Console.WriteLine("Gem Minai: " + geminiResponse);
                 this.tts.SpeakFast($"{geminiResponse}", this.heartVoice);
+            }
+
+            public void CheckTriggerWords(string userInput, ChatSession chatSession)
+            {
+                foreach (string triggerWord in triggerWords)
+                {
+                    if (userInput.Contains(triggerWord))
+                    {
+                        Console.WriteLine("Trigger word detected: " + triggerWord);
+                        Respond(userInput, chatSession);
+                    }
+                }
             }
         }
 
