@@ -17,7 +17,7 @@ namespace Gem_Minai_Localized
         private static void Main(string[] args)
         {
             //Gemini
-            GoogleAi googleAI = new GoogleAi("AIzaSyAyaaljvmRJDBqmrpoOQGtbCP0by_vxDF8");
+            GoogleAi googleAI = new GoogleAi("Gemini API");
             var model = googleAI.CreateGenerativeModel("models/gemini-1.5-flash");
             var history = new List<Content>
             {
